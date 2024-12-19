@@ -19,7 +19,7 @@ Installation et déploiement
 Étape 1 : Récupérer le dépôt
 Clonez le dépôt sur votre machine locale :
 
-git clone https://github.com/mouadh15/ansible-project.git
+git clone https://github.com/mouadh15/Ansible-project.git
 
 Étape 2 : Lancer le script d'installation
 Dans le dossier 

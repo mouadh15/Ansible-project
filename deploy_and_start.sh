@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Mise à jour des packages et installation des dépendances nécessaires
+
 echo "Mise à jour des paquets"
 sudo apt update -y
 
@@ -83,7 +83,7 @@ WantedBy=default.target" | sudo tee /etc/systemd/system/node_exporter.service
 sudo systemctl daemon-reload
 
 # Activer et démarrer le service Node Exporter
-echo "Démarrage de Node Exporter..."
+echo "Démarrage de Node Exporter"
 sudo systemctl enable node_exporter
 sudo systemctl start node_exporter
 
@@ -92,7 +92,7 @@ echo "Installation terminée !"
 
 
 # Lancement des playbooks
-echo "Lancement des playbooks..."
+echo "Lancement des playbooks"
 
 ansible-playbook playbooks/network_config.yml
 ansible-playbook -i inventaire.ini playbooks/conteneur_config.yml

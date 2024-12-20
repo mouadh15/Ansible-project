@@ -1,0 +1,64 @@
+- name: Création d'un tableau de bord Grafana
+  uri:
+    url: "http://{{ groups['grafana'][0] }}:3000/api/dashboards/db"
+    method: POST
+    user: "administrateur"
+    password: "R00tR00t"
+    force_basic_auth: true
+    headers:
+      Content-Type: "application/json"
+    body: |
+      {
+        "dashboard": {
+          "id": null,
+          "uid": null,
+          "title": "Erreurs de réception réseau",
+          "tags": ["network", "errors", "monitoring"],
+          "timezone": "browser",
+          "schemaVersion": 36,
+          "version": 0,
+          "panels": [
+            {
+              "type": "graph",
+              "title": "Erreurs de réception réseau (enp0s3)",
+              "gridPos": {
+                "x": 0,
+                "y": 0,
+                "w": 12,
+                "h": 8
+              },
+              "targets": [
+                {
+                  "expr": "rate(node_network_receive_errs_total{device=\"enp0s3\"}[1m])",
+                  "legendFormat": "Erreurs de réception sur enp0s3",
+                  "refId": "A"
+                }
+              ],
+              "alert": {
+                "alertRule": {
+                  "for": "1m",
+                  "expr": "rate(node_network_receive_errs_total{device=\"enp0s3\"}[1m]) > 10",
+                  "annotations": {
+                    "summary": "Nombre d'erreurs de réception > 10 par minute sur enp0s3"
+                  },
+                  "labels": {
+                    "severity": "critical"
+                  }
+                },
+                "noData": {
+                  "eval": "warn",
+                  "message": "Pas de données disponibles"
+                },
+                "executionError": {
+                  "eval": "warn",
+                  "message": "Erreur d'exécution"
+                }
+              }
+            }
+          ]
+        },
+        "overwrite": true
+      }
+    body_format: json
+    status_code: 200
+    validate_certs: false

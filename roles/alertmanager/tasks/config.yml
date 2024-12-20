@@ -1,0 +1,18 @@
+---
+- name: S'assurer que le conteneur Alertmanager est démarré
+  docker_container:
+    name: alertmanager
+    state: started
+
+- name: Copier alertmanager.yml dans le conteneur Alertmanager
+  command: docker cp "{{ role_path }}/files/alertmanager.yml" alertmanager:/etc/alertmanager/alertmanager.yml
+
+- name: Arrêter le conteneur Alertmanager
+  docker_container:
+    name: alertmanager
+    state: stopped
+
+- name: Démarrer le conteneur Alertmanager
+  docker_container:
+    name: alertmanager
+    state: started

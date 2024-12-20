@@ -19,15 +19,4 @@
     status_code: 200
     validate_certs: false
 
-- block:
-    - name: Tableau de bord principal
-      include_tasks: dashboard.yml
 
-    - name: Tableau de bord "Error Network"
-      include_tasks: networkdashboard.yml
-
-    - name: Tableau de bord "Disk Usage"
-      include_tasks: diskdashboard.yml
-  rescue:
-    - debug:
-        msg: "Continue with others"

@@ -1,0 +1,6 @@
+---
+- name: Configuration du rôle grafana
+  hosts: localhost
+  become: yes
+  roles:
+    - grafana

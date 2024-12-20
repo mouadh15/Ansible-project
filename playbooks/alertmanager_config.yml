@@ -1,0 +1,6 @@
+---
+- name: Configuration d' Alertmanager
+  hosts: localhost
+  become: yes
+  roles:
+    - alertmanager

@@ -1,0 +1,46 @@
+---
+- name: Création des conteneurs Prometheus, Grafana et AlertManager 
+  hosts: localhost
+  become: yes
+  tasks:
+
+
+    - name: Création du  conteneur Prometheus 
+      docker_container:
+        name: prometheus   # Nom  du conteneur
+        image: prom/prometheus:latest
+        state: started
+        restart_policy: always
+        networks:
+          - name: sae502
+            ipv4_address: "{{ groups['prometheus'][0] }}"  # adresse ip  du  Prometheus
+        ports:
+          - "9090:9090"  # port expose
+
+    - name: Création du  conteneur Grafana avec un  login et un password
+      docker_container:
+        name: grafana      # nom  du conteneur
+        image: grafana/grafana:latest
+        state: started
+        restart_policy: always
+        networks:
+          - name: sae502
+            ipv4_address: "{{ groups['grafana'][0] }}"  # adresse IP du Grafana
+        ports:
+          - "3000:3000"  
+        env:
+          GF_SECURITY_ADMIN_USER: "Administrateur"     # déclaration d'utilisateur de l'interface grafana
+          GF_SECURITY_ADMIN_PASSWORD: "R00tR00t" # mot de passe de l'utilisateur 
+
+    
+    - name: Création du conteneur AlertManager
+      docker_container:
+        name: alertmanager # nom  du conteneur
+        image: prom/alertmanager:latest
+        state: started
+        restart_policy: always
+        networks:
+          - name: sae502
+            ipv4_address: "{{ groups['alertmanager'][0] }}"  # adresse ip du  AlertManager
+        ports:
+          - "9093:9093"

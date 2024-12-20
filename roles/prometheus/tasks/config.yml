@@ -1,0 +1,21 @@
+---
+- name: Vérification de démarrage de prometheus
+  docker_container:
+    name: prometheus
+    state: started
+
+- name: Copier le fichier prometheus.yml dans  Prometheus
+  command: docker cp "{{ role_path }}/files/prometheus.yml" prometheus:/etc/prometheus/prometheus.yml
+
+- name: Copier le fichier alert_rules.yml dans Prometheus
+  command: docker cp "{{ role_path }}/files/alert_rules.yml" prometheus:/etc/prometheus/alert_rules.yml
+
+- name: Arrêt du  conteneur Prometheus
+  docker_container:
+    name: prometheus
+    state: stopped
+
+- name: Démarrage du  conteneur Prometheus
+  docker_container:
+    name: prometheus
+    state: started

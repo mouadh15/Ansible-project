@@ -1,0 +1,26 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  group_by: ['alertname']
+  receiver: 'email-alert'
+  continue: false
+  routes:
+    - match:
+        severity: "critical"  # niveau des alertes  "critical"
+      receiver: 'email-alert'
+    - match:
+        severity: "warning"  #  niveau des alertes "warning"
+      receiver: 'email-alert'
+    - match:
+        alertname: Beaucoup_de_charge
+
+receivers:
+- name: 'email-alert'
+  email_configs:
+  - send_resolved: true
+    to: 'ahmed.mouadh.guizani@etu.univ-st-etienne.fr'
+    from: 'ahmed.mouadh.guizani@etu.univ-st-etienne.fr'
+    smarthost: 'smtp.gmail.com:587'
+    auth_username: 'ahmed.mouadh.guizani@etu.univ-st-etienne.fr'
+    auth_password: 'jmqjtsefdfxhxpkd'

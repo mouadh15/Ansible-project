@@ -1,0 +1,52 @@
+groups:
+- name: network_alerts
+  rules:
+  - alert: TropDeLoad
+    expr: node_load1 > 0.8
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Beaucoup de load"
+      description: "Charge  du système dépassant 0.8 pendant 1 minute."
+
+  - alert: HighTcpConnections
+    expr: node_netstat_Tcp_CurrEstab > 100
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Beaucoup de connexions TCP établies"
+      description: >
+        Nombre de connexions TCP  dépassant 10fois.
+        Cela montre soit une surcharge soit une attaque potentielle.
+
+  - alert: HighMemoryUsage
+    expr: 100 * (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes > 80
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Utilisation mémoire élevée"
+      description: >
+        La mémoire utilisée dépasse 80 %.
+
+
+  - alert: HighNetworkReceiveErrors
+    expr: rate(node_network_receive_errs_total[1m]) > 10
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High number of network receive errors detected ."
+
+
+  - alert: HighDiskUsage
+    expr: 100 * (node_filesystem_size_bytes{fstype!~"tmpfs|fuse.*"} - node_filesystem_free_bytes{fstype!~"tmpfs|fuse.*"}) / node_filesystem_size_bytes{fstype!~"tmpfs|fuse.*"} > 80
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High disk usage."
+      description: "Disk usage is above 80%  for the last 5 minutes."
+

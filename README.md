@@ -1,6 +1,7 @@
 Ansible Project
 
 Ce projet vise à automatiser le déploiement et la configuration d'une solution de monitoring basée sur Prometheus, Grafana, et Alertmanager, le tout orchestré avec Ansible. Cette solution permet de surveiller l'état des systèmes et des services via des tableaux de bord visuels et des alertes configurables, le tout dans un environnement de conteneurs géré par Docker.
+
 ________________________________________
 Objectifs du projet
 1.	Automatiser le déploiement des services de monitoring pour réduire les erreurs manuelles.
@@ -8,12 +9,13 @@ Objectifs du projet
 3.	Fournir une solution clé en main pour surveiller l'infrastructure et recevoir des alertes 
 en temps réel.
 4.	Utiliser des conteneurs Docker pour assurer la portabilité et l'isolement des services.
+
 ________________________________________
 Prérequis
 Avant de commencer, assurez-vous que les éléments suivants sont installés sur votre machine :
 •	Git : pour cloner le dépôt.
-•	Docker: pour gérer les conteneurs.
 •	Accessibilité réseau : une adresse IP ou un nom de domaine local pour accéder aux services déployés.
+
 ________________________________________
 Installation et déploiement
 Étape 1 : Récupérer le dépôt
@@ -24,6 +26,7 @@ git clone https://github.com/mouadh15/Ansible-project.git
 Étape 2 : Lancer le script d'installation
 Dans le dossier 
 Le script deploy_and_start.sh est conçu pour automatiser tout le processus. 
+n'oubliez pas le : chmod +x deploy_and_start.sh
 Exécutez-le avec la commande suivante :
 ./deploy_and_start.sh
 
@@ -105,4 +108,17 @@ alerting:
         - targets:
           - "172.20.0.4:9093"
 
+Visualisation des données sur Grafana
 
+Une fois que tous les services sont déployés et configurés, vous pouvez accéder à Grafana pour visualiser les données collectées. Voici un aperçu des tableaux de bord configurés :
+
+    Exemple de tableau de bord principal : Le tableau affiche des métriques clés, comme l'utilisation du CPU, la mémoire, et les statistiques réseau de l'hôte.
+
+    Exemple de visualisation des alertes : Une vue centralisée des alertes actives et des tendances des incidents.
+
+
+Ces visualisations vous permettent de surveiller en temps réel l'état de votre infrastructure et de réagir rapidement en cas de problème.
+
+Pour ajouter ou modifier les tableaux de bord, connectez-vous à Grafana via l'interface utilisateur et explorez les options d'importation ou de personnalisation des visualisations.
+
+GOOD LUCK !!!

@@ -113,10 +113,9 @@ Visualisation des données sur Grafana
 Une fois que tous les services sont déployés et configurés, vous pouvez accéder à Grafana pour visualiser les données collectées. Voici un aperçu des tableaux de bord configurés :
 
     Exemple de tableau de bord principal : Le tableau affiche des métriques clés, comme l'utilisation du CPU, la mémoire, et les statistiques réseau de l'hôte.
-![image](https://github.com/user-attachments/assets/bce44043-bea6-4b70-a485-44d35b9b3186)
 
 
-    Exemple de visualisation des alertes : Une vue centralisée des alertes actives et des tendances des incidents.
+![image](https://github.com/user-attachments/assets/ec629145-d6f5-421d-9667-557b77fef7a1)
 
 
 Ces visualisations vous permettent de surveiller en temps réel l'état de votre infrastructure et de réagir rapidement en cas de problème.

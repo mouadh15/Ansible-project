@@ -1,0 +1,33 @@
+- name: Ajout de la database Prometheus
+  uri:
+    url: "http://{{ groups['grafana'][0] }}:3000/api/datasources"
+    method: POST
+    user: "administrateur"
+    password: "R00tR00t"
+    force_basic_auth: true
+    headers:
+      Content-Type: "application/json"
+    body: 
+      {
+        "name": "Prometheus",
+        "type": "prometheus",
+        "url": "http://{{ groups['prometheus'][0] }}:9090",
+        "access": "proxy",
+        "isDefault": true
+      }
+    body_format: json
+    status_code: 200
+    validate_certs: false
+
+- block:
+    - name: Tableau de bord principal
+      include_tasks: dashboard.yml
+
+    - name: Tableau de bord "Error Network"
+      include_tasks: networkdashboard.yml
+
+    - name: Tableau de bord "Disk Usage"
+      include_tasks: diskdashboard.yml
+  rescue:
+    - debug:
+        msg: "Continue with others"

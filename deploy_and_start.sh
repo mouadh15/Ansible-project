@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Mise à jour des packages et installation des dépendances nécessaires
-echo "Mise à jour des packages..."
+echo "Mise à jour des paquets"
 sudo apt update -y
 
 # Installation de Docker
-echo "Installation de Docker..."
+echo "Installation  Docker"
 sudo apt install \
 apt-transport-https \
 ca-certificates \
@@ -26,34 +26,34 @@ sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Vérification de l'installation de Docker
-echo "Vérification de l'installation de Docker..."
+echo "Vérification de l'installation de Docker"
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo docker --version
 
 
 # Installation de Ansible
-echo "Installation de Ansible..."
+echo "Installation de Ansible"
 sudo apt install -y software-properties-common
 sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install -y ansible
 
 # Vérification de l'installation d'Ansible
-echo "Vérification de l'installation d'Ansible..."
+echo "Vérification Ansible"
 ansible --version
 
 # Installation de Tree
-echo "Installation de Tree..."
+echo "Installation Tree"
 sudo apt install -y tree
 
 # Vérification de l'installation de Tree
-echo "Vérification de l'installation de Tree..."
+echo "Vérification de l'installation de Tree"
 tree --version
 
 
 
 # Installation de Node Exporter
-echo "Installation de Node Exporter..."
+echo "Installation de Node Exporter"
 
 # Télécharger la dernière version de Node Exporter
 wget https://github.com/prometheus/node_exporter/releases/download/v1.4.0/node_exporter-1.4.0.linux-amd64.tar.gz

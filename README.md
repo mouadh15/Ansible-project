@@ -23,18 +23,6 @@ Clonez le dépôt sur votre machine locale :
 
 git clone https://github.com/mouadh15/Ansible-project.git
 
-Étape 2 : Lancer le script d'installation
-Dans le dossier 
-Le script deploy_and_start.sh est conçu pour automatiser tout le processus. 
-n'oubliez pas le : chmod +x deploy_and_start.sh
-Exécutez-le avec la commande suivante :
-./deploy_and_start.sh
-
-Ce script effectue les tâches suivantes :
-•	Installation des dépendances nécessaires (Docker, Ansible, etc.).
-•	Création du réseau Docker nommé sae502 avec le sous-réseau 172.20.0.0/24.
-Déploiement des services Prometheus, Grafana, et Alertmanager dans des conteneurs Docker.
-
 Configuration
 Configuration du réseau Docker
 Le réseau Docker est défini avec les paramètres suivants :
@@ -57,6 +45,7 @@ Les adresses IP statiques des conteneurs sont configurées comme suit :
 •	Alertmanager : 172.20.0.4
 
 Assurez-vous que ces adresses ne sont pas en conflit avec votre réseau existant.
+Il faut changer l'IP de l'hôte dans le fichier inventaire.ini
 Dans le fichier inventaire.ini, vous trouverez les adresses IP des services Grafana, Prometheus et Alertmanager.
 [hote] 
 192.168.1.27
@@ -72,13 +61,14 @@ Une fois le déploiement terminé, vous pouvez accéder aux services via les adr
 •	Grafana : http://172.20.0.2:3000
 •	Prometheus : http://172.20.0.3:9090
 •	Alertmanager : http://172.20.0.4:9093
-Par défaut, les identifiants pour Grafana sont configurés comme suit :
+les identifiants pour Grafana sont configurés comme suit :
 •	Utilisateur : administrateur
 •	Mot de passe : R00tR00t
 Changez-les dès votre première connexion pour sécuriser l'accès.
+
 ________________________________________
 Cible de Prometheus
-
+Il faut changer l'IP de l'hôte dans le fichier prometheus.yml
 Le fichier prometheus.yml contient les cibles des services surveillés :
 scrape_interval: 30s
 evaluation_interval: 30s
@@ -108,6 +98,20 @@ alerting:
         - targets:
           - "172.20.0.4:9093"
 
+Étape 2 : Lancer le script d'installation
+Dans le dossier 
+cd Ansible-project
+Le script deploy_and_start.sh est conçu pour automatiser tout le processus. 
+n'oubliez pas le : chmod +x deploy_and_start.sh
+Exécutez-le avec la commande suivante :
+./deploy_and_start.sh
+
+Ce script effectue les tâches suivantes :
+•	Installation des dépendances nécessaires (Docker, Ansible, etc.).
+•	Création du réseau Docker nommé sae502 avec le sous-réseau 172.20.0.0/24.
+Déploiement des services Prometheus, Grafana, et Alertmanager dans des conteneurs Docker.
+
+
 Visualisation des données sur Grafana
 
 Une fois que tous les services sont déployés et configurés, vous pouvez accéder à Grafana pour visualiser les données collectées. Voici un aperçu des tableaux de bord configurés :
@@ -122,4 +126,4 @@ Ces visualisations vous permettent de surveiller en temps réel l'état de votre
 
 Pour ajouter ou modifier les tableaux de bord, connectez-vous à Grafana via l'interface utilisateur et explorez les options d'importation ou de personnalisation des visualisations.
 
-GOOD LUCK !!!
+

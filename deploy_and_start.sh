@@ -10,16 +10,13 @@ sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Vérification de l'installation de Docker
-echo "Vérification de l'installation de Docker"
 sudo systemctl enable docker
 sudo systemctl start docker
 
 # Installation de Ansible
-echo "Installation de Ansible"
 sudo apt install -y software-properties-common
 sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install -y ansible
-
 
 # Télécharger la dernière version de Node Exporter
 wget https://github.com/prometheus/node_exporter/releases/download/v1.4.0/node_exporter-1.4.0.linux-amd64.tar.gz
